@@ -116,11 +116,21 @@ function HeaderUserbox() {
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <List sx={{ p: 1 }} component="nav">
-          <ListItem button to="/management/profile/details" component={NavLink}>
+          <ListItem
+            button
+            to="/management/profile/details"
+            component={NavLink}
+            onClick={handleClose}
+          >
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary="My Profile" />
           </ListItem>
-          <ListItem button to="/dashboards/messenger" component={NavLink}>
+          <ListItem
+            button
+            to="/dashboards/messenger"
+            component={NavLink}
+            onClick={handleClose}
+          >
             <InboxTwoToneIcon fontSize="small" />
             <ListItemText primary="Messenger" />
           </ListItem>
@@ -128,6 +138,7 @@ function HeaderUserbox() {
             button
             to="/management/profile/settings"
             component={NavLink}
+            onClick={handleClose}
           >
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary="Account Settings" />

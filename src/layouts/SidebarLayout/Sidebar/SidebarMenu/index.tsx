@@ -49,6 +49,7 @@ const MenuWrapper = styled(Box)(
       color: ${theme.colors.alpha.trueWhite[50]};
       padding: ${theme.spacing(0, 2.5)};
       line-height: 1.4;
+      padding-bottom:"68px"
     }
 `
 );
@@ -174,124 +175,100 @@ const SubMenuWrapper = styled(Box)(
 `
 );
 
+const menuList = [
+  {
+    id: 'overview',
+    subHeader: '',
+    children: [
+      {
+        id: 'overview',
+        to: '/overview',
+        item: 'Overview',
+        startIcon: <DesignServicesTwoToneIcon />
+      }
+    ]
+  },
+  {
+    id: 'dashboards',
+    subHeader: 'Dashboards',
+    children: [
+      {
+        id: 'cryptocurrency',
+        to: '/dashboards/crypto',
+        item: 'Cryptocurrency',
+        startIcon: <BrightnessLowTwoToneIcon />
+      }
+    ]
+  },
+  {
+    id: 'management',
+    subHeader: 'Management',
+    children: [
+      {
+        id: 'transactionsList',
+        to: '/management/transactions',
+        item: 'Transactions List',
+        startIcon: <TableChartTwoToneIcon />
+      }
+    ]
+  },
+  {
+    id: 'accounts',
+    subHeader: 'Accounts',
+    children: [
+      {
+        id: 'userProfile',
+        to: '/management/profile/details',
+        item: 'User Profile',
+        startIcon: <AccountCircleTwoToneIcon />
+      },
+      {
+        id: 'accountSettings',
+        to: '/management/profile/settings',
+        item: 'Account Settings',
+        startIcon: <DisplaySettingsTwoToneIcon />
+      }
+    ]
+  }
+];
+
 function SidebarMenu() {
   const { closeSidebar } = useContext(SidebarContext);
 
   return (
     <>
       <MenuWrapper>
-        <List component="div">
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/overview"
-                  startIcon={<DesignServicesTwoToneIcon />}
-                >
-                  Overview
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Dashboards
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/crypto"
-                  startIcon={<BrightnessLowTwoToneIcon />}
-                >
-                  Cryptocurrency
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/dashboards/messenger"
-                  startIcon={<MmsTwoToneIcon />}
-                >
-                  Messenger
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Management
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/transactions"
-                  startIcon={<TableChartTwoToneIcon />}
-                >
-                  Transactions List
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
-        <List
-          component="div"
-          subheader={
-            <ListSubheader component="div" disableSticky>
-              Accounts
-            </ListSubheader>
-          }
-        >
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/profile/details"
-                  startIcon={<AccountCircleTwoToneIcon />}
-                >
-                  User Profile
-                </Button>
-              </ListItem>
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/management/profile/settings"
-                  startIcon={<DisplaySettingsTwoToneIcon />}
-                >
-                  Account Settings
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
-        </List>
-        <List
+        {menuList.map((menu) => (
+          <List
+            key={menu.id}
+            component="div"
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                {menu.subHeader}
+              </ListSubheader>
+            }
+          >
+            {menu.children.map((child) => (
+              <SubMenuWrapper key={child.id}>
+                <List component="div">
+                  <ListItem component="div">
+                    <Button
+                      disableRipple
+                      component={RouterLink}
+                      onClick={closeSidebar}
+                      to={child.to}
+                      startIcon={child.startIcon}
+                    >
+                      {child.item}
+                    </Button>
+                  </ListItem>
+                </List>
+              </SubMenuWrapper>
+            ))}
+          </List>
+        ))}
+
+        {/* <List
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
@@ -459,7 +436,7 @@ function SidebarMenu() {
               </ListItem>
             </List>
           </SubMenuWrapper>
-        </List>
+        </List> */}
       </MenuWrapper>
     </>
   );
