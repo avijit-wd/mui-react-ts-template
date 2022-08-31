@@ -13,7 +13,9 @@ import { useEffect } from 'react';
 import { getTodoReq } from 'redux/api/todoSliceApi';
 
 function App() {
+  // Authentication flag
   const isLoggedIn = true;
+
   const content = useRoutes(routes(isLoggedIn));
 
   // Please remove code below
