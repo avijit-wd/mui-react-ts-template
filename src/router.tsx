@@ -1,10 +1,8 @@
 import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-import { RouteObject } from 'react-router';
 
 import SidebarLayout from 'layouts/SidebarLayout';
 import BaseLayout from 'layouts/BaseLayout';
-
 import SuspenseLoader from 'components/SuspenseLoader';
 
 const Loader = (Component) => (props) =>
@@ -62,9 +60,7 @@ const StatusMaintenance = Loader(
   lazy(() => import('content/pages/Status/Maintenance'))
 );
 
-const auth = true;
-
-const routes: RouteObject[] = [
+const routes = (isLoggedIn: boolean) => [
   {
     path: '',
     element: <BaseLayout />,

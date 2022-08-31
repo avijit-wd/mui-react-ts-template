@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom';
-import router from './router';
+import routes from './router';
 import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -13,7 +13,8 @@ import { useEffect } from 'react';
 import { getTodoReq } from 'redux/api/todoSliceApi';
 
 function App() {
-  const content = useRoutes(router);
+  const isLoggedIn = true;
+  const content = useRoutes(routes(isLoggedIn));
 
   // Please remove code below
   const dispatch: AppDispatch = useDispatch();
